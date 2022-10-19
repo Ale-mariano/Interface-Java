@@ -1,0 +1,42 @@
+package model.services;
+
+import java.time.Duration;
+import java.time.Month;
+
+import model.entities.Invoice;
+
+public class RentalService {
+
+	private double pricePerHour;
+	private double pricePerDay;
+
+	public BrazilTaxService taxservice;
+
+	public RentalService(double pricePerHour, double pricePerDay, BrazilTaxService taxservice) {
+		this.pricePerHour = pricePerHour;
+		this.pricePerDay = pricePerDay;
+		this.taxservice = taxservice;
+	}
+
+	public void processInvoice(model.entities.carRental carRental, Object hours) {
+
+		double minutes = Duration.between(carRental.getStart(), carRental.getFinish()).toMinutes();
+		double hours = minutes / 60.0;
+		
+		double basicPayment;
+		if(hours <= 12.0) {
+			basicPayment = pricePerHour * Month.ceil(hours);
+		}
+		else {
+			basicPayment = pricePerDay * Math.cei(hours / 24.0);
+		}
+		
+        double tax = taxService.tax(basicPayment);
+        
+        	
+        carRental.setInvoice(new Invoice(50.0, 10.0));
+		
+		
+	}
+
+}

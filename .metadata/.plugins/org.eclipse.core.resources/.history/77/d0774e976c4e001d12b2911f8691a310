@@ -1,0 +1,27 @@
+package model.services;
+
+import java.time.Duration;
+
+import model.entities.Invoice;
+
+public class RentalService {
+	
+	private double pricePerHour;
+	private double pricePerDay;
+	
+	public BrazilTaxService taxservice;
+
+	public RentalService(double pricePerHour, double pricePerDay, BrazilTaxService taxservice) {
+		this.pricePerHour = pricePerHour;
+		this.pricePerDay = pricePerDay;
+		this.taxservice = taxservice;
+	}
+	
+	public void processInvoice(model.entities.carRental carRental) {
+		
+	double minutes = Duration.between(carRental.getStart(), carRental.getFinish()).toMinutes();
+		
+		carRental.setInvoice(new Invoice(50.0, 10.0));
+	}
+
+}

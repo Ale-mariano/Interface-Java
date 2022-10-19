@@ -1,0 +1,23 @@
+package model.services;
+
+import model.entities.Invoice;
+
+public class RentalService {
+	
+	private double pricePerHour;
+	private double pricePerDay;
+	
+	public BrazilTaxService taxservice;
+
+	public RentalService(double pricePerHour, double pricePerDay, BrazilTaxService taxservice) {
+		this.pricePerHour = pricePerHour;
+		this.pricePerDay = pricePerDay;
+		this.taxservice = taxservice;
+	}
+	
+	public void processInvoice(model.entities.carRental carRental) {
+		
+		carRental.setInvoice(new Invoice());
+	}
+
+}
